@@ -2,22 +2,21 @@
 
 
 ## Environment(system) variables ##
+## Envirinoment variables should be sent in an .env file at the root of the project ##
 
 Variable  | Value
 ------------- | -------------
-**KAPITOL_TINMAN_PORT**  | **5444 or something**
-**KAPITOL_TINMAN_MODE**  | **development**
-**KAPITOL_TINMAN_SECRET_KEY**  | **anything**
-
+**TINMAN_PORT**  | **5444 or something**
+**TINMAN_MODE**  | **dev**
+**TINMAN_LOG_PATH**  | **/path/to/log/file**
 - - - -
 
 ## Install requirements for TINMAN ##
 
-* pip install flask
-* pip install flask-socketio
+## pip install -r requirements.txt
 
 - - - -
 
 ## Commands to run TINMAN ##
 
-* python main.py
+* python3 main.py
