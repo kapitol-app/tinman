@@ -31,8 +31,16 @@ class Logger:
             color = self.GREEN
         return color
 
+    def prefix(self, log_type):
+        label = ''
+        if log_type == self.log_type.ERROR:
+            label = 'ERROR: '
+        elif log_type == self.log_type.WARNING:
+            label = 'WARNING: '
+        return label
+
     def log(self, log_type, *args):
-        message = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S') + ' :: '
+        message = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S') + ' :: ' + self.prefix(log_type)
         counter = 0
         for arg in args:
             if isinstance(arg, str):
@@ -58,12 +66,12 @@ logger = Logger()
 
 
 def log(*args):
-    logger.log(log_types.NORMAL, args)
+    logger.log(log_types.NORMAL, *args)
 
         
 def error(*args):
-    logger.log(log_types.ERROR, args)
+    logger.log(log_types.ERROR, *args)
 
 
 def warn(*args):
-    logger.log(log_types.WARNING, args)
+    logger.log(log_types.WARNING, *args)

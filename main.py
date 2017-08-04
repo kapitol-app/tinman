@@ -1,21 +1,26 @@
 from flask import Flask
 from flask_socketio import SocketIO, emit
 from config import Config
+import src.utils.logger as logger
+from os.path import join, dirname
+from dotenv import load_dotenv
 
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
 app = Flask(__name__)
 app.configuration = Config()
-app.config['SECRET_KEY'] = app.configuration.secret_key
+#app.config['SECRET_KEY'] = app.configuration.secret_key
 socket_io = SocketIO(app)
 
 
 def message_received():
-    print('message was received!')
+    logger.log('message was received!')
 
 
 @socket_io.on('sample_event')
 def sample_event(json):
-    print('received sample event: ' + str(json))
+    logger.log('received sample event: ', json)
     socket_io.emit('sample_response', json, callback=message_received)
 
 if __name__ == '__main__':
